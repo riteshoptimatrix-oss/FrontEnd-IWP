@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",
   // Security / best-practices: don't advertise the framework.
   poweredByHeader: false,
   reactStrictMode: true,
