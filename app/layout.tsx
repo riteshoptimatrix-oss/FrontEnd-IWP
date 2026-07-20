@@ -9,6 +9,7 @@ import { MotionProvider } from "@/components/motion/provider";
 import { SiteJsonLd } from "@/components/json-ld";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ToastProvider } from "@/components/toast-provider";
+import { SplashScreen } from "@/components/splash/splash-screen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -93,6 +94,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionProvider>
+          <SplashScreen />
           <ToastProvider />
           <ScrollProgress />
           <Navbar />
