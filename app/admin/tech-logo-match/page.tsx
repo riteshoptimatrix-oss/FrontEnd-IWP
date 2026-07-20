@@ -40,8 +40,8 @@ export default function TechLogoMatchAdminDashboard() {
   const fetch = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await techLogoMatchAdminApi.getDashboard();
-      setStats(data);
+      const result = await techLogoMatchAdminApi.getDashboard();
+      setStats(result);
     } catch { /* ignore */ }
     finally { setLoading(false); }
   }, []);

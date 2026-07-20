@@ -50,10 +50,12 @@ export function Reveal({
     delay,
   };
 
+  const resolvedClassName = cn(className) || undefined;
+
   if (reduce) {
     const Tag = as as React.ElementType;
     return (
-      <Tag className={className} {...props}>
+      <Tag className={resolvedClassName} {...props}>
         {children}
       </Tag>
     );
@@ -61,7 +63,7 @@ export function Reveal({
 
   if (inGroup) {
     return (
-      <MotionTag className={cn(className)} variants={variants} transition={mergedTransition} {...props}>
+      <MotionTag className={resolvedClassName} variants={variants} transition={mergedTransition} {...props}>
         {children}
       </MotionTag>
     );
@@ -69,7 +71,7 @@ export function Reveal({
 
   return (
     <MotionTag
-      className={cn(className)}
+      className={resolvedClassName}
       variants={variants}
       initial="hidden"
       whileInView="visible"
@@ -107,10 +109,12 @@ export function RevealGroup({
     as as string
   ];
 
+  const resolvedClassName = cn(className) || undefined;
+
   if (reduce) {
     const Tag = as as React.ElementType;
     return (
-      <Tag className={className} {...props}>
+      <Tag className={resolvedClassName} {...props}>
         {children}
       </Tag>
     );
@@ -118,7 +122,7 @@ export function RevealGroup({
 
   return (
     <MotionTag
-      className={cn(className)}
+      className={resolvedClassName}
       variants={{
         ...staggerContainerVariants,
         visible: {
