@@ -11,7 +11,8 @@ import {
   type RevealType,
 } from "@/lib/animations";
 
-type MotionTag = React.ElementType;
+type MotionTag = any;
+
 
 export interface RevealProps extends React.ComponentPropsWithoutRef<"div"> {
   /** Animation style. @default "fade-up" */
@@ -41,7 +42,7 @@ export function Reveal({
   ...props
 }: RevealProps) {
   const reduce = useReducedMotion();
-  const MotionTag = (m as unknown as Record<string, React.ElementType>)[
+  const MotionTag = (m as unknown as Record<string, any>)[
     as as string
   ];
   const variants = revealVariants[type];
@@ -53,7 +54,7 @@ export function Reveal({
   const resolvedClassName = cn(className) || undefined;
 
   if (reduce) {
-    const Tag = as as React.ElementType;
+    const Tag = as as any;
     return (
       <Tag className={resolvedClassName} {...props}>
         {children}
@@ -105,16 +106,17 @@ export function RevealGroup({
   ...props
 }: RevealGroupProps) {
   const reduce = useReducedMotion();
-  const MotionTag = (m as unknown as Record<string, React.ElementType>)[
+  const MotionTag = (m as unknown as Record<string, any>)[
     as as string
   ];
 
   const resolvedClassName = cn(className) || undefined;
 
   if (reduce) {
-    const Tag = as as React.ElementType;
+    const Tag = as as any;
     return (
       <Tag className={resolvedClassName} {...props}>
+
         {children}
       </Tag>
     );

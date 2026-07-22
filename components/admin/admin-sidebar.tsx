@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/lib/auth-store";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const adminNavItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
@@ -65,7 +64,7 @@ export function AdminSidebar() {
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-[68] flex flex-col border-r border-border/50 bg-white/90 backdrop-blur-xl transition-all duration-300 ease-out dark:bg-ink/90",
+          "fixed inset-y-0 left-0 z-[68] lg:sticky lg:top-0 lg:h-screen lg:z-[60] flex-shrink-0 flex flex-col border-r border-border/50 bg-white/90 backdrop-blur-xl transition-all duration-300 ease-out dark:bg-ink/90",
           collapsed ? "w-[72px]" : "w-64",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
@@ -128,9 +127,6 @@ export function AdminSidebar() {
 
         {/* Footer */}
         <div className="border-t border-border/50 p-3 space-y-1">
-          <div className={cn("flex items-center gap-3 rounded-xl px-3 py-2", collapsed && "justify-center px-2")}>
-            {!collapsed && <ThemeToggle />}
-          </div>
           <Link
             href="/dashboard"
             onClick={() => setMobileOpen(false)}

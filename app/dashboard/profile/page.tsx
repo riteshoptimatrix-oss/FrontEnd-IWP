@@ -14,7 +14,7 @@ import { api } from "@/lib/api-client";
 import { profileSchema, type ProfileInput } from "@/lib/validations";
 
 export default function ProfilePage() {
-  const { user, updateUser } = useAuthStore();
+  const { user, updateProfile } = useAuthStore();
 
   const {
     register,
@@ -37,7 +37,7 @@ export default function ProfilePage() {
 
   const onSubmit = async (data: ProfileInput) => {
     try {
-      const { data: res } = await api.put("/users/profile", {
+      await updateProfile({
         full_name: data.full_name,
         phone: data.phone || null,
         company: data.company || null,
@@ -49,11 +49,10 @@ export default function ProfilePage() {
           website: data.social_website,
         },
       });
-      if (res.user) updateUser(res.user);
       toast.success("Profile updated", { description: "Your profile has been saved." });
     } catch (err: unknown) {
       const message =
-        (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail ||
+        (err as Error).message ||
         "Failed to update profile.";
       toast.error("Update failed", { description: message });
     }

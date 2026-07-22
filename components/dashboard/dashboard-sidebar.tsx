@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { m, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, User, Settings, Shield, Bell, Zap,
@@ -11,7 +11,6 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/lib/auth-store";
 import { siteConfig } from "@/lib/site";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const sidebarItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -24,6 +23,7 @@ const sidebarItems = [
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, logout } = useAuthStore();
   const [collapsed, setCollapsed] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -63,7 +63,7 @@ export function DashboardSidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-[68] flex flex-col border-r border-border/50 bg-white/90 backdrop-blur-xl transition-all duration-300 ease-out dark:bg-ink/90",
+          "fixed inset-y-0 left-0 z-[68] lg:sticky lg:top-0 lg:h-screen lg:z-[60] flex-shrink-0 flex flex-col border-r border-border/50 bg-white/90 backdrop-blur-xl transition-all duration-300 ease-out dark:bg-ink/90",
           collapsed ? "w-[72px]" : "w-64",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
@@ -139,7 +139,7 @@ export function DashboardSidebar() {
             type="button"
             onClick={async () => {
               await logout();
-              window.location.href = "/";
+              router.push("/");
             }}
             className={cn(
               "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30",

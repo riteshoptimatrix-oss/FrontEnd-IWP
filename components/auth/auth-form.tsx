@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { m, AnimatePresence } from "framer-motion";
@@ -24,6 +24,7 @@ type AuthFormMode = "login" | "register";
 export function AuthForm({ mode }: { mode: AuthFormMode }) {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { login, register, isLoading, clearError } = useAuthStore();
   const [showPassword, setShowPassword] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
@@ -48,27 +49,39 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
       if (isLogin) {
-        await login({
+        const success = await login({
           email: data.email,
           password: data.password,
           remember_me: (data as LoginInput).remember_me,
         });
+        
+        if (!success) {
+          throw new Error(useAuthStore.getState().error || "Invalid email or password.");
+        }
+
         toast.success("Welcome back!", {
           description: "You have been signed in successfully.",
         });
       } else {
         const regData = data as RegisterInput;
-        await register({
+        const success = await register({
           full_name: regData.full_name,
           email: regData.email,
           password: regData.password,
           company: regData.company || undefined,
         });
+
+        if (!success) {
+          throw new Error(useAuthStore.getState().error || "Registration failed.");
+        }
+
         toast.success("Account created!", {
           description: "Welcome to India Web Programmers.",
         });
       }
-      router.push("/dashboard");
+      
+      const redirectUrl = searchParams.get("redirect") || "/dashboard";
+      router.push(redirectUrl);
     } catch (err: unknown) {
       const message =
         (err as { message?: string })?.message || "Something went wrong.";

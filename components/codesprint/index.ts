@@ -6,7 +6,7 @@ export { CodePreview } from "./code-preview";
 export { LeaderboardPreview } from "./leaderboard-preview";
 export { AchievementsPreview } from "./achievements-preview";
 export { StatsOverview } from "./stats-overview";
-export { TypingEditor } from "./typing-editor";
+export { MonacoTypingEditor } from "./monaco-typing-editor";
 export { TypingHeader } from "./typing-header";
 export { TypingFooter } from "./typing-footer";
 export { SnippetSelector } from "./snippet-selector";

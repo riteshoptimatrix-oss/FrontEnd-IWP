@@ -34,14 +34,16 @@ export function SplashScreen() {
               }}
             >
               <m.div
-                className="flex size-20 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-soft to-gold shadow-premium sm:size-24"
+                className="flex size-32 items-center justify-center sm:size-40"
                 initial={{ opacity: 0, scale: 0.85, filter: "blur(12px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
               >
-                <span className="text-[1.625rem] font-bold tracking-tight text-white sm:text-2xl">
-                  {siteConfig.shortName}
-                </span>
+                <img
+                  src="https://indiawebprogrammers.com/images/logo.gif"
+                  alt={siteConfig.name}
+                  className="h-32 w-auto object-contain sm:h-40"
+                />
               </m.div>
             </m.div>
 

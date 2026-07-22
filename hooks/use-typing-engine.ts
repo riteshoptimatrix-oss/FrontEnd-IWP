@@ -170,6 +170,62 @@ export function useTypingEngine(text: string) {
     return true;
   }, [getCurrentLine]);
 
+  const handleValueChange = useCallback((newValue: string) => {
+    const current = stateRef.current;
+    if (current.isFinished || current.isPaused) return;
+
+    setState((prev) => {
+      if (prev.isFinished || prev.isPaused) return prev;
+      
+      const targetText = textRef.current;
+      
+      let correct = 0;
+      let incorrect = 0;
+      const nextStates = new Array(targetText.length).fill("pending" as CharState);
+      const errors: number[] = [];
+      
+      // We process characters up to the length of what's currently in the editor
+      for (let i = 0; i < newValue.length; i++) {
+        if (i >= targetText.length) {
+           // Typed beyond snippet
+           incorrect++;
+           errors.push(i);
+           continue;
+        }
+        
+        // Exact character matching
+        if (newValue[i] === targetText[i]) {
+          nextStates[i] = "correct";
+          correct++;
+        } else {
+          nextStates[i] = "incorrect";
+          incorrect++;
+          errors.push(i);
+        }
+      }
+      
+      const typed = newValue.length;
+      const nextIndex = Math.min(newValue.length, targetText.length - 1);
+      
+      // Determine if finished: must match length exactly (or more) and have all correct chars
+      const isFinished = typed >= targetText.length && correct === targetText.length;
+      
+      return {
+        ...prev,
+        charStates: nextStates,
+        currentIndex: nextIndex,
+        typedChars: typed,
+        correctChars: correct,
+        incorrectChars: incorrect,
+        errors,
+        currentLine: getCurrentLine(nextIndex),
+        isStarted: true,
+        startTime: prev.startTime || Date.now(),
+        isFinished,
+      };
+    });
+  }, [getCurrentLine]);
+
   const reset = useCallback(() => {
     setState(createInitialState(textRef.current));
   }, []);
@@ -204,6 +260,7 @@ export function useTypingEngine(text: string) {
     accuracy,
     progress,
     handleKey,
+    handleValueChange,
     reset,
     updateSnippet,
   };

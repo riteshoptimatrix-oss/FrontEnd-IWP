@@ -94,7 +94,7 @@ function FloatingTechIcon({
   delay = 0,
   label,
 }: {
-  icon: React.ElementType;
+  icon: any;
   className: string;
   delay?: number;
   label: string;
@@ -138,7 +138,7 @@ export interface HeroProps {
 }
 
 export function Hero({
-  eyebrow = "Enterprise Digital Engineering",
+  eyebrow = "IndiaWebProgrammer",
   title = "We engineer",
   highlight = "premium digital experiences",
   description = "India Web Programmers is your end-to-end partner for high-performance websites, products and platforms — crafted with precision, accessibility and scale in mind.",

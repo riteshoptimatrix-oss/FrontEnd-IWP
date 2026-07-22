@@ -25,33 +25,39 @@ export function TypingFooter({
   const remaining = Math.max(0, totalChars - currentIndex);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white/60 p-5 shadow-lg ring-1 ring-black/5 backdrop-blur-xl transition-all">
       {/* Progress bar */}
-      <div className="h-1 overflow-hidden rounded-full bg-zinc-900/80 border border-zinc-800/50">
+      <div className="relative h-2 overflow-hidden rounded-full bg-slate-100 ring-1 ring-inset ring-slate-200">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-gold/80 via-gold to-gold-soft transition-all duration-300 ease-out shadow-[0_0_8px_rgba(200,170,80,0.3)]"
+          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gold/50 via-gold to-yellow-300 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(234,179,8,0.5)]"
           style={{ width: `${progress * 100}%` }}
         />
       </div>
 
       {/* Stats row */}
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-        <StatItem label="WPM" value={wpm} color="text-gold" />
-        <StatItem label="Accuracy" value={`${accuracy}%`} color="text-emerald-400" />
-        <div className="h-4 w-px bg-zinc-800" />
-        <StatItem label="Correct" value={correctChars} color="text-emerald-400/70" />
-        <StatItem
-          label="Errors"
-          value={incorrectChars}
-          color={incorrectChars > 0 ? "text-red-400" : "text-zinc-600"}
-        />
-        <div className="h-4 w-px bg-zinc-800" />
-        <StatItem label="Typed" value={currentIndex} />
-        <StatItem label="Left" value={remaining} />
-        <div className="flex-1" />
-        <span className="text-[11px] font-medium text-zinc-600 tabular-nums">
-          {Math.round(progress * 100)}%
-        </span>
+      <div className="flex flex-wrap items-center justify-between gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <StatItem label="WPM" value={wpm} color="text-gold text-xl drop-shadow-[0_0_8px_rgba(234,179,8,0.4)]" />
+          <div className="h-8 w-px bg-slate-200" />
+          <StatItem label="Accuracy" value={`${accuracy}%`} color="text-emerald-600 text-xl drop-shadow-sm" />
+          <div className="h-8 w-px bg-slate-200" />
+          <StatItem label="Correct" value={correctChars} color="text-emerald-600/80" />
+          <StatItem
+            label="Errors"
+            value={incorrectChars}
+            color={incorrectChars > 0 ? "text-red-600 font-bold" : "text-slate-500"}
+          />
+        </div>
+        
+        <div className="flex items-center gap-6">
+          <div className="flex gap-4">
+            <StatItem label="Typed" value={currentIndex} />
+            <StatItem label="Left" value={remaining} />
+          </div>
+          <span className="flex items-center justify-center rounded-xl bg-slate-50 px-4 py-1.5 font-mono text-sm font-bold text-slate-700 ring-1 ring-slate-200 shadow-sm">
+            {Math.round(progress * 100)}%
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -67,9 +73,9 @@ function StatItem({
   color?: string;
 }) {
   return (
-    <div className="flex items-center gap-1.5">
-      <span className="text-[11px] text-zinc-600">{label}</span>
-      <span className={cn("font-mono text-sm font-semibold tabular-nums", color || "text-zinc-400")}>
+    <div className="flex flex-col gap-0.5">
+      <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-500">{label}</span>
+      <span className={cn("font-mono text-base font-bold tabular-nums transition-colors duration-300", color || "text-slate-700")}>
         {value}
       </span>
     </div>

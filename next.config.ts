@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["localhost:3000", "127.0.0.1:3000"],
   output: "export",
   // Security / best-practices: don't advertise the framework.
   poweredByHeader: false,

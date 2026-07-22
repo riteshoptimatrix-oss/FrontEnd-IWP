@@ -19,36 +19,37 @@ export function Footer({ className }: { className?: string }) {
   return (
     <footer
       className={cn(
-        "border-t border-border/50 bg-white/60 backdrop-blur-2xl dark:bg-ink/60",
+        "border-t border-black/5 bg-white/70 shadow-[0_-8px_30px_rgba(0,0,0,0.02)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/70",
         className,
       )}
     >
-      <Container className="py-16 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-6">
+      <Container className="py-10 lg:py-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-6">
           {/* Brand + Newsletter + Socials */}
-          <div className="flex flex-col gap-5 lg:col-span-2">
+          <div className="flex flex-col gap-6 lg:col-span-2">
             <Link
               href="/"
-              className="group flex items-center gap-2.5 text-lg font-semibold tracking-tight"
+              className="group flex items-center shrink-0 w-fit rounded-lg bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]"
               aria-label={`${siteConfig.name} home`}
             >
-              <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-gold-soft text-white text-sm font-bold shadow-sm transition-transform duration-300 group-hover:scale-105">
-                {siteConfig.shortName}
-              </span>
-              <span className="text-foreground">{siteConfig.name}</span>
+              <img
+                src="https://indiawebprogrammers.com/images/logo.gif"
+                alt={siteConfig.name}
+                className="h-[76px] w-auto object-contain"
+              />
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
               {siteConfig.tagline} {siteConfig.description}
             </p>
 
-            <div className="mt-2 flex flex-col gap-3">
+            <div className="mt-4 flex flex-col gap-2">
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground/60">
                 Subscribe to our newsletter
               </p>
               <NewsletterForm />
             </div>
 
-            <div className="mt-2 flex items-center gap-3">
+            <div className="mt-6 flex items-center gap-2">
               {siteConfig.socials.map((social) => (
                 <a
                   key={social.href}
@@ -56,7 +57,7 @@ export function Footer({ className }: { className?: string }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex size-9 items-center justify-center rounded-xl border border-border/50 text-muted-foreground transition-all duration-200 hover:border-gold/30 hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5"
+                  className="flex size-10 items-center justify-center rounded-xl border border-border/50 bg-white/50 text-slate-500 shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200/60 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md dark:bg-slate-900/50 dark:hover:border-blue-800/50 dark:hover:bg-blue-900/30 dark:hover:text-blue-400"
                 >
                   <SocialIcon name={social.icon} />
                 </a>
@@ -66,16 +67,16 @@ export function Footer({ className }: { className?: string }) {
 
           {/* Navigation Columns */}
           {footerNav.map((column) => (
-            <nav key={column.title} aria-label={column.title}>
-              <h3 className="mb-4 text-sm font-semibold text-foreground">
+            <nav key={column.title} aria-label={column.title} className="lg:ml-auto">
+              <h3 className="mb-3 text-sm font-semibold tracking-wide text-foreground">
                 {column.title}
               </h3>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-2.5">
                 {column.items.map((item) => (
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-gold"
+                      className="text-sm font-medium text-muted-foreground transition-colors hover:text-blue-600 dark:hover:text-blue-400"
                     >
                       {item.label}
                     </Link>
@@ -86,29 +87,29 @@ export function Footer({ className }: { className?: string }) {
           ))}
 
           {/* Contact */}
-          <div className="lg:col-span-1">
-            <h3 className="mb-4 text-sm font-semibold text-foreground">
+          <div className="lg:col-span-1 lg:ml-auto">
+            <h3 className="mb-3 text-sm font-semibold tracking-wide text-foreground">
               Contact
             </h3>
             <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-gold/70" aria-hidden />
-                <span>{siteConfig.contact.address}</span>
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-blue-500" aria-hidden />
+                <span className="leading-relaxed">{siteConfig.contact.address}</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="size-4 shrink-0 text-gold/70" aria-hidden />
+              <li className="flex items-center gap-3">
+                <Mail className="size-4 shrink-0 text-blue-500" aria-hidden />
                 <a
                   href={`mailto:${siteConfig.contact.email}`}
-                  className="transition-colors hover:text-gold"
+                  className="font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {siteConfig.contact.email}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="size-4 shrink-0 text-gold/70" aria-hidden />
+              <li className="flex items-center gap-3">
+                <Phone className="size-4 shrink-0 text-blue-500" aria-hidden />
                 <a
                   href={`tel:${siteConfig.contact.phone.replace(/\s+/g, "")}`}
-                  className="transition-colors hover:text-gold"
+                  className="font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {siteConfig.contact.phone}
                 </a>
@@ -119,9 +120,9 @@ export function Footer({ className }: { className?: string }) {
       </Container>
 
       {/* Bottom Bar */}
-      <div className="border-t border-border/50">
-        <Container className="flex flex-col items-center justify-between gap-4 py-6 sm:flex-row">
-          <p className="text-sm text-muted-foreground">
+      <div className="border-t border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-slate-900/50">
+        <Container className="flex flex-col items-center justify-between gap-3 py-4 sm:flex-row">
+          <p className="text-sm font-medium text-muted-foreground">
             &copy; {year} {siteConfig.name}. All rights reserved.
           </p>
           <ul className="flex items-center gap-6">
@@ -129,7 +130,7 @@ export function Footer({ className }: { className?: string }) {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {link.label}
                 </Link>

@@ -9,11 +9,18 @@ export const api = axios.create({
   timeout: 15000,
 });
 
-let accessToken: string | null = null;
+let accessToken: string | null = typeof window !== "undefined" ? localStorage.getItem("iwp_access_token") : null;
 let refreshPromise: Promise<string | null> | null = null;
 
 export function setAccessToken(token: string | null) {
   accessToken = token;
+  if (typeof window !== "undefined") {
+    if (token) {
+      localStorage.setItem("iwp_access_token", token);
+    } else {
+      localStorage.removeItem("iwp_access_token");
+    }
+  }
 }
 
 export function getAccessToken() {
@@ -50,7 +57,12 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Skip retry logic for authentication endpoints
+    const isAuthEndpoint = originalRequest.url?.includes('/auth/login') || 
+                           originalRequest.url?.includes('/auth/register') || 
+                           originalRequest.url?.includes('/auth/refresh');
+
+    if (error.response?.status === 401 && !originalRequest._retry && !isAuthEndpoint) {
       originalRequest._retry = true;
 
       if (!refreshPromise) {

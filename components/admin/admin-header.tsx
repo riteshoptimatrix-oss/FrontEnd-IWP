@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useAuthStore } from "@/lib/auth-store";
 import { Shield, Bell, User } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export function AdminHeader() {
   const { user } = useAuthStore();
@@ -18,7 +17,6 @@ export function AdminHeader() {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <ThemeToggle />
         <div className="flex items-center gap-2 rounded-xl border border-border/50 bg-secondary/50 px-3 py-1.5">
           <div className="flex size-7 items-center justify-center rounded-lg bg-gold/10">
             <User className="size-3.5 text-gold" />

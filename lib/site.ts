@@ -3,6 +3,8 @@ import type { NavItem, SiteSocial, ContactInfo } from "@/types";
 import {
   Code2, Smartphone, BrainCircuit, PenTool, ShoppingCart,
   Cloud, Puzzle, LineChart, Globe,
+  HeartPulse, Landmark, GraduationCap, Building2,
+  Plane, Truck, PlaySquare, BookOpen, Briefcase, FileText, Video
 } from "lucide-react";
 
 /**
@@ -89,15 +91,45 @@ export const servicesMegaMenu: MegaMenuSection = {
   ],
 };
 
+export const industriesMegaMenu: MegaMenuSection = {
+  title: "Industries We Serve",
+  items: [
+    { label: "Healthcare", href: "/industries/healthcare", description: "HIPAA-compliant platforms, EHR/EMR, telemedicine.", icon: HeartPulse },
+    { label: "Finance & Banking", href: "/industries/finance", description: "Fintech dashboards, payment gateways, trading systems.", icon: Landmark },
+    { label: "E-commerce & Retail", href: "/industries/ecommerce", description: "Headless storefronts, marketplaces, POS systems.", icon: ShoppingCart },
+    { label: "Education & E-learning", href: "/industries/education", description: "LMS platforms, virtual classrooms, EdTech apps.", icon: GraduationCap },
+    { label: "Real Estate", href: "/industries/real-estate", description: "Property portals, CRM tools, virtual tour platforms.", icon: Building2 },
+    { label: "Travel & Hospitality", href: "/industries/travel", description: "Booking engines, travel portals, hotel management.", icon: Plane },
+    { label: "Logistics & Supply Chain", href: "/industries/logistics", description: "Fleet tracking, warehouse management, inventory systems.", icon: Truck },
+    { label: "Media & Entertainment", href: "/industries/media", description: "Streaming platforms, content management, OTT apps.", icon: PlaySquare },
+  ],
+  featured: [
+    { label: "View All Industries →", href: "/industries" },
+  ],
+};
+
 export const portfolioMegaMenu: MegaMenuSection = {
   title: "Featured Work",
   items: [
-    { label: "Aurora Digital Bank", href: "/portfolio", description: "Banking dashboard for 2M+ users." },
-    { label: "Lumen Lifestyle Store", href: "/portfolio", description: "Headless storefront, +38% conversion." },
-    { label: "Vertex SaaS Platform", href: "/portfolio", description: "Enterprise-scale analytics platform." },
+    { label: "Lead Finder Agent", href: "/portfolio", description: "AI-powered lead generation with Playwright." },
+    { label: "Advance School Management System", href: "/portfolio", description: "Comprehensive PHP school platform." },
+    { label: "Advance PMS for the Company", href: "/portfolio", description: "MERN-based performance management." },
   ],
   featured: [
     { label: "View All Projects →", href: "/portfolio" },
+  ],
+};
+
+export const resourcesMegaMenu: MegaMenuSection = {
+  title: "Resources & Insights",
+  items: [
+    { label: "Blog", href: "/resources/blog", description: "Insights, news, and technical deep dives.", icon: BookOpen },
+    { label: "Case Studies", href: "/resources/case-studies", description: "Success stories from our clients.", icon: Briefcase },
+    { label: "HTML Compiler", href: "/resources/html-compiler", description: "Write and compile HTML code directly in your browser.", icon: Code2 },
+    { label: "Portfolio Projects", href: "/portfolio", description: "View our selected work and case studies.", icon: Code2 },
+  ],
+  featured: [
+    { label: "View All Resources →", href: "/resources" },
   ],
 };
 

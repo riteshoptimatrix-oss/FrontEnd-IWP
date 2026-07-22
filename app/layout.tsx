@@ -3,13 +3,15 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 
 import { siteConfig } from "@/lib/site";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+
 import { MotionProvider } from "@/components/motion/provider";
 import { SiteJsonLd } from "@/components/json-ld";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ToastProvider } from "@/components/toast-provider";
 import { SplashScreen } from "@/components/splash/splash-screen";
+
+import { Navbar } from "@/components/navbar";
+import { GlobalFooter } from "@/components/global-footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -82,6 +84,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
@@ -98,10 +101,10 @@ export default function RootLayout({
           <ToastProvider />
           <ScrollProgress />
           <Navbar />
-          <main id="main" className="flex flex-1 flex-col">
+          <div className="flex flex-1 flex-col pt-16 lg:pt-[76px]">
             {children}
-          </main>
-          <Footer />
+          </div>
+          <GlobalFooter />
         </MotionProvider>
       </body>
     </html>

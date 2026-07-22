@@ -35,7 +35,7 @@ const languages = [
 ];
 
 export default function SettingsPage() {
-  const { user, updateUser } = useAuthStore();
+  const { user, updateProfile } = useAuthStore();
 
   const {
     register,
@@ -60,12 +60,11 @@ export default function SettingsPage() {
 
   const onSubmit = async (data: SettingsInput) => {
     try {
-      const { data: res } = await api.put("/users/settings", data);
-      if (res.user) updateUser(res.user);
+      await updateProfile(data);
       toast.success("Settings saved", { description: "Your preferences have been updated." });
     } catch (err: unknown) {
       const message =
-        (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail ||
+        (err as Error).message ||
         "Failed to save settings.";
       toast.error("Save failed", { description: message });
     }

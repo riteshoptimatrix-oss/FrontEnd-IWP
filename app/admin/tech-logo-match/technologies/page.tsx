@@ -112,7 +112,7 @@ export default function TechnologiesAdminPage() {
   const fetch = useCallback(async () => {
     setLoading(true);
     try {
-      const { data: res } = await techLogoMatchAdminApi.listTechnologies({ page, limit: 20, search, status: filterStatus, difficulty: filterDifficulty });
+      const res = await techLogoMatchAdminApi.listTechnologies({ page, limit: 20, search, status: filterStatus, difficulty: filterDifficulty });
       setData(res);
     } catch { /* ignore */ }
     finally { setLoading(false); }
